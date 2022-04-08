@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: rgb(11, 15, 46);
-  color: rgb(168, 179, 177);
+@layer components {
+  .container {
+    @apply w-[90%] m-auto md:w-[80%];
+  }
 }
