@@ -15,7 +15,7 @@ interface Giph {
 const useGif = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [giphData, setGiphData] = useState<Giph>();
-  const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
+  const url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=20`;
   const fetchData = async () => {
     const { data } = await axios.get(url);
     setGiphData(data?.data);
