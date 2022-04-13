@@ -7,6 +7,6 @@
     @apply w-[93%] m-auto md:w-[90%];
   }
   body {
-    @apply bg-blue-50;
+    @apply bg-blue-50/50;
   }
 }
