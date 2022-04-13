@@ -4,7 +4,7 @@
 
 @layer components {
   .container {
-    @apply w-[93%] m-auto sm:w-[90%] md:w-[85%];
+    @apply w-[93%] m-auto md:w-[90%];
   }
   body {
     @apply bg-blue-50;
