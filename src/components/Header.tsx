@@ -9,7 +9,7 @@ const Header = () => {
       </a>
       <input
         value={search}
-        className="flex-grow md:w-[50%] md:flex-grow-0 p-2 text-lg border-blue-100 border outline-none rounded-md focus:border-blue-400 focus:bg-blue-50"
+        className="flex-grow md:w-[50%] md:flex-grow-0 py-2 px-4 text-lg border-blue-100 border outline-none rounded-md focus:border-blue-400 focus:bg-blue-50"
         type="text"
         placeholder="Search"
         onChange={(e) => setSearch(e.target.value)}

@@ -6,7 +6,7 @@ const GifBoxes = () => {
   const { isLoading, giphData } = useStateContext();
   return (
     <>
-      {console.log(isLoading)}
+      {/* {console.log(isLoading)} */}
       {isLoading ? (
         <Loading />
       ) : (

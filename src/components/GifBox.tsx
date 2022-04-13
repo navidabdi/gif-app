@@ -2,7 +2,7 @@ const GifBox = ({ gif }: { gif: any }) => {
   return (
     <article className="p-4 shadow-sm rounded-sm bg-white flex flex-col gap-4">
       <img
-        className="w-full h-full object-cover rounded-sm bg-blue-100"
+        className="w-full h-[250px] object-cover rounded-sm bg-blue-100"
         src={gif?.images?.fixed_height?.webp}
         alt={gif?.title}
         loading="lazy"

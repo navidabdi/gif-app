@@ -15,14 +15,14 @@ interface Giph {
 const useGif = () => {
   const [giphData, setGiphData] = useState<Giph>();
   const [search, setSearch] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const searchUrl = `https://api.giphy.com/v1/gifs/search?q=${search}&limit=4&api_key=${API_KEY}`;
-  const url = `https://api.giphy.com/v1/gifs/trending?limit=4&api_key=${API_KEY}`;
   let timer: NodeJS.Timeout;
 
   const fetchData = async (search: string) => {
+    const API_KEY = process.env.REACT_APP_API_KEY;
+    const searchUrl = `https://api.giphy.com/v1/gifs/search?q=${search}&limit=12&api_key=${API_KEY}`;
+    const url = `https://api.giphy.com/v1/gifs/trending?limit=12&api_key=${API_KEY}`;
     setIsLoading(true);
     await axios
       .get(`${search?.length > 0 ? searchUrl : url}`)
@@ -33,15 +33,9 @@ const useGif = () => {
       .catch((err) => console.error(err));
   };
 
-  const makeDelayToFetchTheSearchQuery = (search: string) => {
-    timer = setTimeout(() => {
-      fetchData(search);
-    }, 2000);
-  };
-
   useEffect(() => {
-    clearTimeout(timer);
-    makeDelayToFetchTheSearchQuery(search);
+    timer = setTimeout(() => fetchData(search), 1000);
+    return () => clearTimeout(timer);
   }, [search]);
 
   return [giphData, fetchData, search, setSearch, isLoading];
