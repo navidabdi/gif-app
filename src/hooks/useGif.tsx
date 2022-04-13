@@ -13,18 +13,38 @@ interface Giph {
 }
 
 const useGif = () => {
-  const API_KEY = process.env.REACT_APP_API_KEY;
   const [giphData, setGiphData] = useState<Giph>();
-  const url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=8`;
-  const fetchData = async () => {
-    const { data } = await axios.get(url);
-    setGiphData(data?.data);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [search, setSearch] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  return [giphData, fetchData];
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const searchUrl = `https://api.giphy.com/v1/gifs/search?q=${search}&limit=4&api_key=${API_KEY}`;
+  const url = `https://api.giphy.com/v1/gifs/trending?limit=4&api_key=${API_KEY}`;
+  let timer: NodeJS.Timeout;
+
+  const fetchData = async (search: string) => {
+    setIsLoading(true);
+    await axios
+      .get(`${search?.length > 0 ? searchUrl : url}`)
+      .then((data) => {
+        setGiphData(data?.data?.data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const makeDelayToFetchTheSearchQuery = (search: string) => {
+    timer = setTimeout(() => {
+      fetchData(search);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    clearTimeout(timer);
+    makeDelayToFetchTheSearchQuery(search);
+  }, [search]);
+
+  return [giphData, fetchData, search, setSearch, isLoading];
 };
 
 export default useGif;
